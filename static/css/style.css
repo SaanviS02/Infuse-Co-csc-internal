@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body{
+    background-color: #f4efec;
+}
+
+/* Menu page */
+
+.tab_box{
+    width: 75%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tab_box .tab_btn{
+    font-size: 18px;
+    font-weight: 400;
+    background: none;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.tab_box .tab_btn.active{
+    color: #999b85;
+}
+
+.content_box .content{
+    display: none;
+}
+
+.content_box .content.active{
+    display: block;
+}

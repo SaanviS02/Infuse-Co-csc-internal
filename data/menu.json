@@ -1,0 +1,28 @@
+{
+    "Milk Tea": {
+        "Pearl Milk Tea": {"price": 5},
+        "Taro Milk Tea": {"price": 5},
+        "Brown Sugar Milk Tea": {"price": 5},
+        "Oolong Milk Tea": {"price": 5},
+        "Earl Grey Milk Tea": {"price": 5},
+        "Caramel Milk Tea": {"price": 5}
+    },
+
+    "Fruit Tea": {
+        "Mango Green Tea": {"price": 5},
+        "Passionfruit Black Tea": {"price": 5},
+        "Lychee Green Tea": {"price": 5},
+        "Lemon Ginger Green Tea": {"price": 5},
+        "Grapefruit Green tea": {"price": 5},
+        "Peach Iced Tea": {"price": 5}
+    },
+
+    "Yogurt Series": {
+        "Mango Yogurt Drink": {"price": 5},
+        "Strawberry-Mango Yogurt Drink": {"price": 5},
+        "Grapefruit Yogurt Drink": {"price": 5},
+        "Peach Yogurt Drink": {"price": 5},
+        "Lemon Yogurt": {"price": 5},
+        "Purple Rice Yogurt Drink": {"price": 5}
+    }
+}
