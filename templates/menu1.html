@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Boba Shop{% endblock %}
+
+{% block content %}
+    <body>
+        <h1>Menu</h1>
+
+        <div class="container">
+            <div class="tab_box">
+                <button class="tab_btn active">Milk Tea</button>
+                <button class="tab_btn">Fruit Tea</button>
+                <button class="tab_btn">Yogurt Drink</button>
+                <button class="tab_btn">Browse Toppings</button>
+            </div>
+            
+            <div class="content_box">
+                <div class="content active">
+                    <h2>Milk Tea</h2>
+                   <p>bleh bleh bleh</p> 
+                </div>
+
+                <div class="content">
+                    <h2>Fruit Tea</h2>
+                   <p>whats up peeps</p> 
+                </div>
+                
+                <div class="content">
+                    <h2>Yogurt Drink</h2>
+                   <p>yum yum yum</p> 
+                </div>
+
+                <div class="content">
+                    <h2>Toppings</h2>
+                   <p>nom nom nom</p> 
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const tabs= document.querySelectorAll('.tab_btn');
+            const all_content= document.querySelectorAll('.content');
+            
+            tabs.forEach((tab, index)=>{
+                tab.addEventListener('click', (e)=>{
+                    tabs.forEach(tab=>{tab.classList.remove('active')});
+                    tab.classList.add('active')
+                
+                all_content.forEach(content=>{content.classList.remove('active')});
+                all_content[index].classList.add('active');
+                })
+            })
+        </script>
+
+    </body>
+{% endblock %}

@@ -1,11 +1,11 @@
 {
     "Milk Tea": {
-        "Pearl Milk Tea": {"price": 5},
-        "Taro Milk Tea": {"price": 5},
-        "Brown Sugar Milk Tea": {"price": 5},
-        "Oolong Milk Tea": {"price": 5},
-        "Earl Grey Milk Tea": {"price": 5},
-        "Caramel Milk Tea": {"price": 5}
+        "Pearl Milk Tea": {"price": 5, "image": "pearl-milk-tea.png"},
+        "Taro Milk Tea": {"price": 5, "image": "taro-milk-tea.png"},
+        "Brown Sugar Milk Tea": {"price": 5, "image": "brown-sugar-milk-tea.png"},
+        "Matcha Milk Tea": {"price": 5, "image": "matcha-milk-tea.png"},
+        "Earl Grey Milk Tea": {"price": 5, "image": "earl-milk-tea.png"},
+        "Caramel Milk Tea": {"price": 5, "image": "caramel-milk-tea.png"}
     },
 
     "Fruit Tea": {

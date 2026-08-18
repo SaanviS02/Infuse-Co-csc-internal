@@ -6,12 +6,15 @@
 </head>
 <body>
     <header>
-        <h1 class="heading">Boba Shop</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for ('menu') }}">Menu</a>
-            <a href="{{ url_for ('invoices') }}">Invoices</a>
-            <a href="{{ url_for ('contact') }}">Contact</a>
+        <nav class="navbar">
+            <a href="{{ url_for('index') }}">
+                <img class="logo" src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo">
+            </a>
+            <ul>
+                <li><a href="{{ url_for ('menu') }}">Menu</a></li>
+                <li><a href="{{ url_for ('invoices') }}">Invoices</a></li>
+                <li><a href="{{ url_for ('contact') }}">Contact</a></li>
+            </ul>
         </nav>
     </header>  
     

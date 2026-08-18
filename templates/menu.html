@@ -4,36 +4,28 @@
 
 {% block content %}
     <body>
-        <h1>Menu</h1>
+        <h1 class="menu_title">Menu</h1>
 
         <div class="container">
             <div class="tab_box">
-                <button class="tab_btn active">Milk Tea</button>
-                <button class="tab_btn">Fruit Tea</button>
-                <button class="tab_btn">Yogurt Drink</button>
-                <button class="tab_btn">Browse Toppings</button>
+                {% for category in menu %}
+                    <button class="tab_btn{% if loop.first %} active{% endif %}">{{ category }}</button>
+                {% endfor %}
             </div>
             
             <div class="content_box">
-                <div class="content active">
-                    <h2>Milk Tea</h2>
-                   <p>bleh bleh bleh</p> 
-                </div>
-
-                <div class="content">
-                    <h2>Fruit Tea</h2>
-                   <p>whats up peeps</p> 
-                </div>
-                
-                <div class="content">
-                    <h2>Yogurt Drink</h2>
-                   <p>yum yum yum</p> 
-                </div>
-
-                <div class="content">
-                    <h2>Toppings</h2>
-                   <p>nom nom nom</p> 
-                </div>
+                {% for category, items in menu.items() %}
+                    <div class="content{% if loop.first %} active{% endif %}">
+                        <ul class="menu_list">
+                            {% for name, details in items.items() %}
+                                <li class="menu_item">
+                                    <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ name }}">
+                                    <p>{{ name }} - ${{ details['price'] }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 

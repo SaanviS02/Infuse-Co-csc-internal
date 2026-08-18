@@ -10,8 +10,8 @@ def index():
 
 @app.route('/menu')
 def menu():
-    with open ('menu.json') as f:
-        menu_data = json.load(f)
+    with open ('data/menu.json') as file:
+        menu_data = json.load(file)
     return render_template('menu.html', menu=menu_data)
 
 @app.route('/invoices')
