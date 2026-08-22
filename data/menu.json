@@ -9,7 +9,7 @@
     },
 
     "Fruit Tea": {
-        "Mango Green Tea": {"price": 5},
+        "Mango Green Tea": {"price": 5, "image": "pearl-milk-tea.png"},
         "Passionfruit Black Tea": {"price": 5},
         "Lychee Green Tea": {"price": 5},
         "Lemon Ginger Green Tea": {"price": 5},

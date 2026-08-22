@@ -18,7 +18,7 @@
                     <div class="content{% if loop.first %} active{% endif %}">
                         <ul class="menu_list">
                             {% for name, details in items.items() %}
-                                <li class="menu_item">
+                                <li class="menu_item" data-name="preview-{{ name | replace(' ', '-') }}">
                                     <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ name }}">
                                     <p>{{ name }} - ${{ details['price'] }}</p>
                                 </li>
@@ -27,6 +27,30 @@
                     </div>
                 {% endfor %}
             </div>
+        </div>
+
+        <div class="product-preview">
+                {% for category, items in menu.items() %}
+                    {% for name, details in items.items() %}
+                        <div class="preview" data-target="preview-{{ name | replace(' ', '-') }}">
+                            <div class="left_side">
+                                <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ name }}">
+                                <i class="fas fa-times"></i>
+                                <h3>{{ name }} - ${{ details['price'] }}</h3>
+                            </div>
+                            
+                            <div class="addon_options">
+                                <p>Topping Options:</p>
+                                <p>Sugar level:</p>
+                                <p>Ice Level:</p>
+                            </div>
+
+                            <div class="buttons">
+                                <a href="#" class="add_to_cart">Add to cart</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
         </div>
 
         <script>
@@ -41,6 +65,29 @@
                 all_content.forEach(content=>{content.classList.remove('active')});
                 all_content[index].classList.add('active');
                 })
+            })
+
+            let previewContainer = document.querySelector('.product-preview');
+            let previewBox = previewContainer.querySelectorAll('.preview');
+
+            document.querySelectorAll('.content_box .menu_item').forEach(product => {
+                product.onclick = () => {
+                    previewContainer.style.display = 'flex';
+                    let name = product.getAttribute('data-name');
+                    previewBox.forEach(preview => {
+                        let target = preview.getAttribute('data-target');
+                        if(name == target){
+                            preview.classList.add('active');   
+                        }
+                    })
+                }
+            })
+
+            previewBox.forEach(close =>{
+                close.querySelector('.fa-times').onclick = () =>{
+                    close.classList.remove('active');
+                    previewContainer.style.display = 'none';
+                }
             })
         </script>
 

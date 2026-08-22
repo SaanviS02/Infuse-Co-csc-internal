@@ -9,6 +9,9 @@ body{
     min-height: 100vh;
 }
 
+html {
+    overflow-x: hidden;
+}
 .logo {
     height: 100px;
 }
@@ -48,6 +51,17 @@ body{
 
 /* Menu page */
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu_title {
+    font-size: 40px;
+    padding: 25px;
+    text-align: center;
+}
+
 .tab_box{
     display: flex;
     justify-content: space-evenly;
@@ -77,8 +91,7 @@ body{
 .menu_list {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(auto-fit, minmax(clamp(125px, 35vw, 220px), 1fr));
     /* border: 1px solid green; */
     padding: 20px 70px 0 70px;
     gap: 20px 70px;
@@ -88,7 +101,7 @@ body{
     text-align: center;
     background-color: #ddb7ac;
     border-radius: 12px;
-    padding: 12px;
+    padding: 24px;
 }
 
 .menu_item img {
@@ -101,5 +114,129 @@ body{
 }
 
 .menu_item p {
-    padding-top: 10px;
+    font-size: clamp(14px, 4vw, 20px);
 }
+
+.menu_item {
+    cursor: pointer;
+}
+
+.menu_item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.container .content_box .menu_item:hover p {
+    color: #999b85;
+}
+
+/* Creating the menu items clickable and size adjustable with the screen size*/
+
+.product-preview {
+    position: fixed;
+    top: 0; left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-preview .preview {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+    background-color: #ddb7ac;
+    border-radius: 12px;
+    position: relative;
+    margin: 2rem;
+    width: 40rem;
+}
+
+.product-preview .preview img{
+    height: 30rem;
+}
+
+.product-preview .preview.active {
+    display: grid;
+}
+
+.product-preview .preview img {
+    height: 20rem;
+}
+
+.product-preview .preview .fa-times {
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    cursor: pointer;
+    color: #999b85;
+    font-size: 3rem;
+}
+
+.product-preview .preview .buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.product-preview .preview .buttons a{
+    flex: 1 1 16rem;
+    padding: 0.7rem;
+    font-size: 1.15rem;
+    color: black;
+    border: 0.1rem solid #999b85;
+    text-decoration: none;
+}
+
+.product-preview .preview .buttons a.add_to_cart:hover{
+    background: #999b85;
+    color: black;
+}
+
+@media (max-width:911px) {
+
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width:768px) {
+
+    .product-preview .preview img{
+    height: 25rem;
+}
+}
+
+@media (max-width:450px) {
+
+    html {
+        font-size: 50%;
+    }
+}
+
+/* Styling the addon options */
+
+.preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: "left addon" "buttons buttons";
+}
+
+.left_side      { grid-area: left; }
+.addon_options  { grid-area: addon; }
+.buttons        { grid-area: buttons; }
+
+.addon_options{
+    border: 1px solid yellow;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.addon_options p {
+    border: 1px solid grey;
+}
+
+.left_side {
+    border: 1px solid white;
+}
+
