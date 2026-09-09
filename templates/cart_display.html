@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Boba Shop{% endblock %}
+
+{% block content %}
+    <body>
+        <h1>Your Cart:</h1>
+            {% if cart %}
+                <ul>
+                {% for item_name, details in cart.items() %}
+                    <li>
+                        <strong>{{ item_name }}</strong><br>
+                        Toppings: {{ details['toppings'] }}<br>
+                        Sugar Level: {{ details['sugar_level'] }}<br>
+                        Ice Level: {{ details['ice_level'] }}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Your cart is empty!</p>
+            {% endif %}
+    </body>
+{% endblock %}

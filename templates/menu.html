@@ -40,14 +40,44 @@
                             </div>
                             
                             <div class="addon_options">
-                                <p>Topping Options:</p>
-                                <p>Sugar level:</p>
-                                <p>Ice Level:</p>
+                                <div>
+                                    <form action="{{url_for('select_addon')}}" method="post" id="form-{{ name | replace(' ', '-') }}">
+                                        <input type="hidden" name="item_name" value="{{ name }}">
+
+                                        <fieldset>
+                                            <legend>Topping Options:</legend>
+                                            <select name="toppings" id="toppings-{{ name | replace(' ', '-') }}">
+                                                {% for topping_name, topping_details in toppings.items() %}
+                                                <option value="{{ topping_name }}">{{ topping_name }} - ${{ details['price'] }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>Sugar level:</legend>
+                                            <select name="sugar_level" id="sugar_level-{{ name | replace(' ', '-') }}">
+                                                {% for level in sugar_level %}
+                                                <option value="{{ level }}">{{ level }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>Ice Level:</legend>
+                                            <select name="ice_level" id="ice_level-{{ name | replace(' ', '-') }}">
+                                                {% for level in ice_level %}
+                                                <option value="{{ level }}">{{ level }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </fieldset>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="buttons">
-                                <a href="#" class="add_to_cart">Add to cart</a>
+                                <button type="submit" class="add_to_cart" form="form-{{ name | replace(' ', '-') }}">Add to cart</button>
                             </div>
+                            
                         </div>
                     {% endfor %}
                 {% endfor %}
