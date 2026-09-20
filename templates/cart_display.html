@@ -4,27 +4,27 @@
 
 {% block content %}
     <body>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="flashes">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-
+        
         <h1>Your Cart:</h1>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
             {% if cart %}
                 <ul>
                 {% for cart_key, details in cart.items() %}
                     <li>
-                        <strong>{{ item_name }}</strong><br>
-                        Toppings: {{ details['toppings'] }}<br>
+                        <strong>{{ details['item_name'] }} - ${{ '%.2f' % details['price'] }}</strong><br>
+                        Toppings: {{ details['toppings'] }} - ${{ '%.2f' % details['topping_price'] }}<br>
                         Sugar Level: {{ details['sugar_level'] }}<br>
                         Ice Level: {{ details['ice_level'] }}<br>
-                        Drink price: ${{ '%.2f' % details['price'] }}<br>
-                        Topping price: ${{ '%.2f' % details['topping_price'] }}<br>
                         <strong>Drink total: ${{ '%.2f' % ((details['price'] + details['topping_price']) * details['quantity']) }}</strong>
                          <a href="{{ url_for('remove_from_cart', item=cart_key) }}">[Remove]</a>
                     </li>

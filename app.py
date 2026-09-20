@@ -84,6 +84,11 @@ def select_addon():
             'quantity': 1
         }
 
+    print("CART ORDER RIGHT NOW:", list(cart.keys()))
+    session['cart'] = cart
+    session.modified = True
+    return redirect(url_for('cart_display'))
+
     session['cart'] = cart # To update the session
     session.modified = True # Make Flask also save it
     return redirect(url_for('cart_display'))
