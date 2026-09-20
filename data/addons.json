@@ -1,11 +1,11 @@
 {
     "toppings": {
-        "Black Pearls": {"price": 1},
-        "Aloe Vera": {"price": 1},
-        "Coconut pieces": {"price": 1}
+        "Black Pearls": {"price": 1.5},
+        "Aloe Vera": {"price": 2},
+        "Coconut pieces": {"price": 2.5}
     },
 
-    "sugar_level": ["0%, 25%, 50%, 75%, 100%"],
+    "sugar_level": [0, 25, 50, 75, 100],
 
-    "ice_level": ["0%, 25%, 50%, 75%, 100%"]
+    "ice_level": [0, 25, 50, 75, 100]
 }

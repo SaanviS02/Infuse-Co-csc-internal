@@ -4,20 +4,48 @@
 
 {% block content %}
     <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
         <h1>Your Cart:</h1>
             {% if cart %}
                 <ul>
-                {% for item_name, details in cart.items() %}
+                {% for cart_key, details in cart.items() %}
                     <li>
                         <strong>{{ item_name }}</strong><br>
                         Toppings: {{ details['toppings'] }}<br>
                         Sugar Level: {{ details['sugar_level'] }}<br>
-                        Ice Level: {{ details['ice_level'] }}
+                        Ice Level: {{ details['ice_level'] }}<br>
+                        Drink price: ${{ '%.2f' % details['price'] }}<br>
+                        Topping price: ${{ '%.2f' % details['topping_price'] }}<br>
+                        <strong>Drink total: ${{ '%.2f' % ((details['price'] + details['topping_price']) * details['quantity']) }}</strong>
+                         <a href="{{ url_for('remove_from_cart', item=cart_key) }}">[Remove]</a>
                     </li>
                 {% endfor %}
                 </ul>
+
+                <h4>Cart Total: ${{ '%.2f' % total }}</h4>
+
             {% else %}
                 <p>Your cart is empty!</p>
             {% endif %}
+
+            <form action="{{ url_for('checkout') }}" method="post">
+                <label for="customer_name_checkout">Your Name:</label>
+                <input type="text" name="customer_name" id="customer_name_checkout" required>
+
+                <div class="checkout_cancel_buttons">
+                    <button type="submit">Checkout</button>
+                    <button type="submit" formaction="{{ url_for('cancel_order') }}" formnovalidate onclick="return confirm('Are you sure you want to cancel?')">Cancel Order</button>
+                </div>
+            </form>
+
     </body>
 {% endblock %}

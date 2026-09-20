@@ -48,7 +48,7 @@
                                             <legend>Topping Options:</legend>
                                             <select name="toppings" id="toppings-{{ name | replace(' ', '-') }}">
                                                 {% for topping_name, topping_details in toppings.items() %}
-                                                <option value="{{ topping_name }}">{{ topping_name }} - ${{ details['price'] }}</option>
+                                                <option value="{{ topping_name }}">{{ topping_name }} - ${{ topping_details['price'] }}</option>
                                                 {% endfor %}
                                             </select>
                                         </fieldset>
