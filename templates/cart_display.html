@@ -1,51 +1,52 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Boba Shop{% endblock %}
+{% block title %}Cart - Boba Shop{% endblock %}
 
 {% block content %}
     <body>
-        
         <h1>Your Cart:</h1>
 
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul class="flashes">
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li><strong><em>{{ message }}</em></strong></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
             {% if cart %}
                 <ul>
-                {% for cart_key, details in cart.items() %}
+                {% for details in cart %}
                     <li>
                         <strong>{{ details['item_name'] }} - ${{ '%.2f' % details['price'] }}</strong><br>
                         Toppings: {{ details['toppings'] }} - ${{ '%.2f' % details['topping_price'] }}<br>
                         Sugar Level: {{ details['sugar_level'] }}<br>
                         Ice Level: {{ details['ice_level'] }}<br>
+                        Quantity: {{ details['quantity'] }}<br>
                         <strong>Drink total: ${{ '%.2f' % ((details['price'] + details['topping_price']) * details['quantity']) }}</strong>
-                         <a href="{{ url_for('remove_from_cart', item=cart_key) }}">[Remove]</a>
+                        <a href="{{ url_for('remove_from_cart', item=details['cart_key']) }}">[Remove]</a>
                     </li>
                 {% endfor %}
                 </ul>
 
                 <h4>Cart Total: ${{ '%.2f' % total }}</h4>
 
-            {% else %}
+                <form action="{{ url_for('checkout') }}" method="post">
+                    <label for="customer_name_checkout">Your Name:</label>
+                    <input type="text" name="customer_name" id="customer_name_checkout" required>
+
+                    <div class="checkout_cancel_buttons">
+                        <button type="submit">Checkout</button>
+                        <button type="submit" formaction="{{ url_for('cancel_order') }}" formnovalidate onclick="return confirm('Are you sure you want to cancel?')">Cancel Order</button>
+                    </div>
+                </form>
+
+            {% elif not messages %}
+                <!-- This only shows if the cart is empty AND there are no flash messages -->
                 <p>Your cart is empty!</p>
             {% endif %}
-
-            <form action="{{ url_for('checkout') }}" method="post">
-                <label for="customer_name_checkout">Your Name:</label>
-                <input type="text" name="customer_name" id="customer_name_checkout" required>
-
-                <div class="checkout_cancel_buttons">
-                    <button type="submit">Checkout</button>
-                    <button type="submit" formaction="{{ url_for('cancel_order') }}" formnovalidate onclick="return confirm('Are you sure you want to cancel?')">Cancel Order</button>
-                </div>
-            </form>
+        {% endwith %}
 
     </body>
 {% endblock %}

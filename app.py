@@ -11,9 +11,7 @@ def clear_cart():
 
 # Calculate's total price based on the cart (drink prices AND topping prices)
 def calculate_total(cart):
-    total = sum(item['price'] * item['quantity'] for item in cart.values())
-    total += sum(item['topping_price'] * item['quantity'] for item in cart.values())
-    return total
+    return sum((item['price'] + item['topping_price']) * item['quantity'] for item in cart)
 
 @app.route('/')
 def index():
@@ -39,13 +37,14 @@ def contact():
 
 @app.route('/cart_display')
 def cart_display():
-    cart = session.get('cart', {})
+    cart = session.get('cart', [])
     total = calculate_total(cart)
     return render_template('cart_display.html', cart=cart, total=total)
+    
 
 @app.route('/select_addon', methods=['POST']) 
 def select_addon():
-    cart = session.get('cart', {}) # Get cart form session or start a new one
+    cart = session.get('cart', [])  # Get cart list from session or start empty list
 
     with open('data/menu.json') as file:
         menu_data = json.load(file)
@@ -53,28 +52,40 @@ def select_addon():
     with open('data/addons.json') as file:
         addons = json.load(file)
 
-    # Get the selected drink name, toppings, sugar and ice level
     item_name = request.form.get('item_name')
     toppings = request.form.get('toppings')
     sugar_level = request.form.get('sugar_level')
     ice_level = request.form.get('ice_level')
 
-    # Look up the drink's price by searching each drink category (eg: fruit tea, milk tea etc)
+    # Count's how many of the drink is already in the cart (ignoring toppings/sugar/ice)
+    current_drink_count = sum(item['quantity'] for item in cart if item['item_name'] == item_name)
+
+    # Stop's more than 3 of the same drink's being added (only 3 drinks avaliable per drink)
+    if current_drink_count >= 3:
+        flash(f"There is a max limit of 3 {item_name} per order.")
+        return redirect(url_for('cart_display'))
+
     drink_price = None
     for category, items in menu_data.items():
         if item_name in items:
             drink_price = items[item_name]['price']
             break
 
-    # Look up the chosen topping's price (0 if no topping matched)
     topping_price = addons['toppings'].get(toppings, {}).get('price', 0)
+    cart_key = f"{item_name} | {toppings} | {sugar_level} | {ice_level}"
 
-    cart_key = f"{item_name} | {toppings} | {sugar_level} | {ice_level}" # allows users to order the same drink but with different addons selected
+    # Search for an existing matching item in the cart list
+    item_exists = False
+    for item in cart:
+        if item['cart_key'] == cart_key:
+            item['quantity'] += 1
+            item_exists = True
+            break
 
-    if cart_key in cart:
-        cart[cart_key]['quantity'] += 1
-    else:
-        cart[cart_key] = {
+    # If it's a new item combination, append it to the end of the list
+    if not item_exists:
+        cart.append({
+            'cart_key': cart_key,
             'item_name': item_name,
             'price': drink_price,
             'toppings': toppings,
@@ -82,29 +93,31 @@ def select_addon():
             'sugar_level': sugar_level,
             'ice_level': ice_level,
             'quantity': 1
-        }
+        })
 
-    print("CART ORDER RIGHT NOW:", list(cart.keys()))
     session['cart'] = cart
     session.modified = True
     return redirect(url_for('cart_display'))
 
-    session['cart'] = cart # To update the session
-    session.modified = True # Make Flask also save it
-    return redirect(url_for('cart_display'))
-
 @app.route('/remove_from_cart/<item>')
 def remove_from_cart(item):
-    cart = session.get('cart', {})
-
-    if item in cart:
-        del cart[item]
-        session['cart'] = cart
-        session.modified = True
-        flash("Removed item from cart.")
-    else:
-        flash("Item not found in cart")
-
+    cart = session.get('cart', [])
+    new_cart = []
+    
+    for cart_item in cart:
+        if cart_item['cart_key'] == item:
+            if cart_item['quantity'] > 1:
+                # If there's more than one, lower the quantity by 1
+                cart_item['quantity'] -= 1
+                new_cart.append(cart_item)
+            # If quantity is 1, we do NOT append it (it gets deleted)
+        else:
+            # Keep all other drinks untouched
+            new_cart.append(cart_item)
+            
+    session['cart'] = new_cart
+    session.modified = True
+    flash("Updated cart.")
     return redirect(url_for('cart_display'))
 
     # Checkout cart
