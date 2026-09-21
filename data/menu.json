@@ -1,28 +1,86 @@
 {
     "Milk Tea": {
-        "Pearl Milk Tea": {"price": 5, "image": "pearl-milk-tea.png"},
-        "Taro Milk Tea": {"price": 5, "image": "taro-milk-tea.png"},
-        "Brown Sugar Milk Tea": {"price": 5, "image": "brown-sugar-milk-tea.png"},
-        "Matcha Milk Tea": {"price": 5, "image": "matcha-milk-tea.png"},
-        "Earl Grey Milk Tea": {"price": 5, "image": "earl-milk-tea.png"},
-        "Caramel Milk Tea": {"price": 5, "image": "caramel-milk-tea.png"}
+        "Pearl Milk Tea": {
+            "price": 5,
+            "stock": 19,
+            "image": "pearl-milk-tea.png"
+        },
+        "Taro Milk Tea": {
+            "price": 5,
+            "stock": 18,
+            "image": "taro-milk-tea.png"
+        },
+        "Brown Sugar Milk Tea": {
+            "price": 5,
+            "stock": 22,
+            "image": "brown-sugar-milk-tea.png"
+        },
+        "Matcha Milk Tea": {
+            "price": 5,
+            "stock": 15,
+            "image": "matcha-milk-tea.png"
+        },
+        "Earl Grey Milk Tea": {
+            "price": 5,
+            "stock": 17,
+            "image": "earl-milk-tea.png"
+        },
+        "Caramel Milk Tea": {
+            "price": 5,
+            "stock": 12,
+            "image": "caramel-milk-tea.png"
+        }
     },
-
     "Fruit Tea": {
-        "Mango Green Tea": {"price": 5, "image": "pearl-milk-tea.png"},
-        "Passionfruit Black Tea": {"price": 5},
-        "Lychee Green Tea": {"price": 5},
-        "Lemon Ginger Green Tea": {"price": 5},
-        "Grapefruit Green tea": {"price": 5},
-        "Peach Iced Tea": {"price": 5}
+        "Mango Green Tea": {
+            "price": 5,
+            "stock": 17
+        },
+        "Passionfruit Black Tea": {
+            "price": 5,
+            "stock": 15
+        },
+        "Lychee Green Tea": {
+            "price": 5,
+            "stock": 15
+        },
+        "Lemon Ginger Green Tea": {
+            "price": 5,
+            "stock": 10
+        },
+        "Grapefruit Green tea": {
+            "price": 5,
+            "stock": 20
+        },
+        "Peach Iced Tea": {
+            "price": 5,
+            "stock": 13
+        }
     },
-
     "Yogurt Series": {
-        "Mango Yogurt Drink": {"price": 5},
-        "Strawberry-Mango Yogurt Drink": {"price": 5},
-        "Grapefruit Yogurt Drink": {"price": 5},
-        "Peach Yogurt Drink": {"price": 5},
-        "Lemon Yogurt": {"price": 5},
-        "Purple Rice Yogurt Drink": {"price": 5}
+        "Mango Yogurt Drink": {
+            "price": 5,
+            "stock": 20
+        },
+        "Strawberry-Mango Yogurt Drink": {
+            "price": 5,
+            "stock": 15
+        },
+        "Grapefruit Yogurt Drink": {
+            "price": 5,
+            "stock": 19
+        },
+        "Peach Yogurt Drink": {
+            "price": 5,
+            "stock": 15
+        },
+        "Lemon Yogurt": {
+            "price": 5,
+            "stock": 10
+        },
+        "Purple Rice Yogurt Drink": {
+            "price": 5,
+            "stock": 18
+        }
     }
 }

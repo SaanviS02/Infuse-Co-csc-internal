@@ -1,0 +1,14 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Jason_2026-09-21_175508
+Customer Name: Jason
+Date: 2026-09-21 17:55:08
+
+Items:
+- Pearl Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Pearl Milk Tea (Aloe Vera, 50 sugar, 100 ice): 1 x $7.00 = $7.00
+
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+Total: $20.00

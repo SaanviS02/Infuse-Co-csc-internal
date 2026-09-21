@@ -1,0 +1,12 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Testing_2026-09-21_180227
+Customer Name: Testing
+Date: 2026-09-21 18:02:27
+
+Items:
+- Pearl Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Grapefruit Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+Total: $13.00

@@ -3,7 +3,34 @@
 {% block title %}Home - Boba Shop{% endblock %}
 
 {% block content %}
-    <body>
-        
+    <body class="invoices">
+        {% if customer_name %}
+            <h1>Invoice</h1>
+            <p>Thank you for your order {{ customer_name }} :D</p>
+
+            <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
+            <p><strong>Customer Name:</strong> {{ customer_name }}</p>  
+            <p><strong>Date:</strong> {{ invoice_date }}</p>
+
+            <h2>Drinks:</h2>
+            <ul>
+                {% for item in cart %}
+                    <li>{{ item['item_name'] }} ({{ item['toppings'] }}, {{ item['sugar_level'] }} sugar, {{ item['ice_level'] }} ice):
+                        {{ item['quantity'] }} x ${{ '%.2f' % (item['price'] + item['topping_price']) }}
+                        = ${{ '%.2f' % ((item['price'] + item['topping_price']) * item['quantity']) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h2>Total: ${{ '%.2f' % total }}</h2>
+
+            <a href="{{ url_for('cart_display') }}">Back to shop</a>
+
+        {% else %}
+            <h2>No Invoice to Show</h2>
+            <p>Place an order via the menu page to see your invoice here.</p>
+            <a href="{{ url_for('menu') }}">Go to Menu</a>
+        {% endif %}
+
     </body>
 {% endblock %}
