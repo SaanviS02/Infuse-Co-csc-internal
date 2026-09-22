@@ -1,0 +1,14 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Grayson_2026-09-22_170845
+Customer Name: Grayson
+Date: 2026-09-22 17:08:45
+
+Items:
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Lemon Ginger Green Tea (Black Pearls, 75 sugar, 50 ice): 1 x $6.50 = $6.50
+
+- Pearl Milk Tea (Coconut pieces, 25 sugar, 25 ice): 1 x $7.50 = $7.50
+
+Total: $20.50

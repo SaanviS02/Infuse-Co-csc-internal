@@ -2,12 +2,12 @@
     "Milk Tea": {
         "Pearl Milk Tea": {
             "price": 5,
-            "stock": 19,
+            "stock": 18,
             "image": "pearl-milk-tea.png"
         },
         "Taro Milk Tea": {
             "price": 5,
-            "stock": 18,
+            "stock": 20,
             "image": "taro-milk-tea.png"
         },
         "Brown Sugar Milk Tea": {
@@ -17,70 +17,82 @@
         },
         "Matcha Milk Tea": {
             "price": 5,
-            "stock": 15,
+            "stock": 13,
             "image": "matcha-milk-tea.png"
         },
         "Earl Grey Milk Tea": {
             "price": 5,
             "stock": 17,
-            "image": "earl-milk-tea.png"
+            "image": "earl-grey-milk-tea.png"
         },
-        "Caramel Milk Tea": {
+        "Mango Milk Tea": {
             "price": 5,
             "stock": 12,
-            "image": "caramel-milk-tea.png"
+            "image": "mango-milk-tea.png"
         }
     },
     "Fruit Tea": {
         "Mango Green Tea": {
             "price": 5,
-            "stock": 17
+            "stock": 17,
+            "image": "mango-green-tea.png"
         },
-        "Passionfruit Black Tea": {
+        "Passionfruit Green Tea": {
             "price": 5,
-            "stock": 15
+            "stock": 14,
+            "image": "passionfruit-green-tea.png"
         },
         "Lychee Green Tea": {
             "price": 5,
-            "stock": 15
+            "stock": 13,
+            "image": "lychee-green-tea.png"
         },
         "Lemon Ginger Green Tea": {
             "price": 5,
-            "stock": 10
+            "stock": 10,
+            "image": "lemon-ginger-green-tea.png"
         },
         "Grapefruit Green tea": {
             "price": 5,
-            "stock": 20
+            "stock": 20,
+            "image": "grapefruit-green-tea.png"
         },
         "Peach Iced Tea": {
             "price": 5,
-            "stock": 13
+            "stock": 12,
+            "image": "peach-iced-tea.png"
         }
     },
     "Yogurt Series": {
         "Mango Yogurt Drink": {
             "price": 5,
-            "stock": 20
+            "stock": 19,
+            "image": "mango-yogurt-drink.png"
         },
-        "Strawberry-Mango Yogurt Drink": {
+        "Strawberry Yogurt Drink": {
             "price": 5,
-            "stock": 15
+            "stock": 11,
+            "image": "strawberry-yogurt-drink.png"
         },
         "Grapefruit Yogurt Drink": {
             "price": 5,
-            "stock": 19
+            "stock": 19,
+            "image": "grapefruit-yogurt-drink.png"
         },
         "Peach Yogurt Drink": {
             "price": 5,
-            "stock": 15
+            "stock": 15,
+            "image": "peach-yogurt-drink.png"
         },
         "Lemon Yogurt": {
             "price": 5,
-            "stock": 10
+            "stock": 10,
+            "image": "lemon-yogurt-drink.png"
         },
         "Purple Rice Yogurt Drink": {
             "price": 5,
-            "stock": 18
+            "stock": 18,
+            "image": "purple-rice-yogurt-drink.png"
         }
     }
 }

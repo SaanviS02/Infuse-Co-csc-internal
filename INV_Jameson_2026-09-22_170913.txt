@@ -1,0 +1,12 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Jameson_2026-09-22_170913
+Customer Name: Jameson
+Date: 2026-09-22 17:09:13
+
+Items:
+- Taro Milk Tea (Aloe Vera, 50 sugar, 100 ice): 1 x $7.00 = $7.00
+
+- Peach Iced Tea (Coconut pieces, 50 sugar, 100 ice): 1 x $7.50 = $7.50
+
+Total: $14.50

@@ -1,0 +1,14 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Stock_Update_Test_2026-09-22_172023
+Customer Name: Stock Update Test
+Date: 2026-09-22 17:20:23
+
+Items:
+- Matcha Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Passionfruit Green Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Mango Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+Total: $19.50

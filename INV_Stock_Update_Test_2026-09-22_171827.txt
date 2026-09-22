@@ -1,0 +1,14 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Stock_Update_Test_2026-09-22_171827
+Customer Name: Stock Update Test
+Date: 2026-09-22 17:18:27
+
+Items:
+- Earl Grey Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Brown Sugar Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+- Peach Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+Total: $19.50

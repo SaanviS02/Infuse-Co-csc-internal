@@ -21,8 +21,8 @@
                     <li>
                         <strong>{{ details['item_name'] }} - ${{ '%.2f' % details['price'] }}</strong><br>
                         Toppings: {{ details['toppings'] }} - ${{ '%.2f' % details['topping_price'] }}<br>
-                        Sugar Level: {{ details['sugar_level'] }}<br>
-                        Ice Level: {{ details['ice_level'] }}<br>
+                        Sugar Level: {{ details['sugar_level'] }}%<br>
+                        Ice Level: {{ details['ice_level'] }}%<br>
                         Quantity: {{ details['quantity'] }}<br>
                         <strong>Drink total: ${{ '%.2f' % ((details['price'] + details['topping_price']) * details['quantity']) }}</strong>
                         <a href="{{ url_for('remove_from_cart', item=details['cart_key']) }}">[Remove]</a>

@@ -69,7 +69,6 @@ def cart_display():
     cart = session.get('cart', [])
     total = calculate_total(cart)
     return render_template('cart_display.html', cart=cart, total=total)
-    
 
 @app.route('/select_addon', methods=['POST']) 
 def select_addon():
@@ -136,13 +135,10 @@ def remove_from_cart(item):
     for cart_item in cart:
         if cart_item['cart_key'] == item:
             if cart_item['quantity'] > 1:
-                # If there's more than one, lower the quantity by 1
-                cart_item['quantity'] -= 1
+                cart_item['quantity'] -= 1 # If there's more than one, lower the quantity by 1
                 new_cart.append(cart_item)
-            # If quantity is 1, we do NOT append it (it gets deleted)
-        else:
-            # Keep all other drinks untouched
-            new_cart.append(cart_item)
+        else:         
+            new_cart.append(cart_item) # Keep all other drinks untouched
             
     session['cart'] = new_cart
     session.modified = True

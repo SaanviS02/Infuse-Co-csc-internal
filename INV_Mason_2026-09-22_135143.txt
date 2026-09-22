@@ -1,0 +1,12 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Mason_2026-09-22_135143
+Customer Name: Mason
+Date: 2026-09-22 13:51:43
+
+Items:
+- Lychee Green Tea (Aloe Vera, 50 sugar, 75 ice): 1 x $7.00 = $7.00
+
+- Strawberry-Mango Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $6.50 = $6.50
+
+Total: $13.50
