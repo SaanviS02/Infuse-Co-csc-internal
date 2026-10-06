@@ -20,7 +20,7 @@
                             {% for name, details in items.items() %}
                                 <li class="menu_item" data-name="preview-{{ name | replace(' ', '-') }}">
                                     <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ name }}">
-                                    <p>{{ name }} - ${{ details['price'] }}</p>
+                                    <p>{{ name }} - ${{ "%.2f"|format(details['price']) }}</p>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -36,7 +36,7 @@
                             <div class="left_side">
                                 <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ name }}">
                                 <i class="fas fa-times"></i>
-                                <h3>{{ name }} - ${{ details['price'] }}</h3>
+                                <h3>{{ name }} - ${{ "%.2f"|format(details['price']) }}</h3>
                             </div>
                             
                             <div class="addon_options">
@@ -48,7 +48,7 @@
                                             <legend>Topping Options:</legend>
                                             <select name="toppings" id="toppings-{{ name | replace(' ', '-') }}">
                                                 {% for topping_name, topping_details in toppings.items() %}
-                                                <option value="{{ topping_name }}">{{ topping_name }} - ${{ topping_details['price'] }}</option>
+                                                <option value="{{ topping_name }}">{{ topping_name }} - ${{ "%.2f"|format(topping_details['price']) }}</option>
                                                 {% endfor %}
                                             </select>
                                         </fieldset>
