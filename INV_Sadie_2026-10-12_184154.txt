@@ -1,0 +1,10 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Sadie_2026-10-12_184154
+Customer Name: Sadie
+Date: 2026-10-12 18:41:54
+
+Items:
+- Passionfruit Green Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.50 = $9.50
+
+Total: $9.50

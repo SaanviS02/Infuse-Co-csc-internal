@@ -24,6 +24,22 @@ def initialise_database():
 def calculate_total(cart):
     return sum((item['price'] + item['topping_price']) * item['quantity'] for item in cart)
 
+# Loyalty points system
+def load_phone_numbers():
+    with open('data/phone_numbers.json') as file:
+        return json.load(file)
+
+def save_phone_numbers(phone_numbers):
+    with open('data/phone_numbers.json', 'w') as file:
+        json.dump(phone_numbers, file, indent=4)
+
+@app.route('/test')
+def test():
+    phone_numbers = load_phone_numbers()
+    phone_numbers.append({'phone': '123', 'points': 5})
+    save_phone_numbers(phone_numbers)
+    return "Done!"
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -167,11 +183,35 @@ def checkout():
     # 4. Calculate total cost
     total = calculate_total(cart)
 
-    # 5. Calculate the invoice number and date
+    # 5. Phone number loyalty points sytem
+    phone = request.form.get('customer_number', '').strip()
+
+    if phone:
+        if not phone.isdigit() or len(phone) != 10:
+            flash("Phone number must be exactly 10 digits")
+            return redirect(url_for('cart_display'))
+
+        customer_phone_numbers = load_phone_numbers()
+
+        customer = None
+        for person in customer_phone_numbers:
+            if person['phone'] == phone:
+                customer = person
+        
+        if customer is None:
+            customer = {'phone': phone, 'points': 0}
+            customer_phone_numbers.append(customer)
+
+        customer['points'] += int(total) # $1 = 1 Bubbly point
+
+        save_phone_numbers(customer_phone_numbers)
+        flash(f"You now have {customer['points']} bubbly points!")
+
+    # 6. Calculate the invoice number and date
     invoice_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date.replace(':', '').replace(' ', '_')}"
 
-    # 6. Save the order to SQlite database
+    # 7. Save the order to SQlite database
     with sqlite3.connect('boba_shop.db') as conn:
         cursor =  conn.cursor()
         cursor.execute('''
@@ -179,7 +219,7 @@ def checkout():
             VALUES (?, ?, ?, ?)
         ''', (invoice_number, customer_name, json.dumps(cart), total))
 
-    #7. Generate an invoice file
+    # 8. Generate an invoice file
     invoice_filename = f"{invoice_number}.txt"
 
     with open(invoice_filename, 'w') as f:
@@ -194,7 +234,7 @@ def checkout():
                     f"{item['quantity']} x ${item['price'] + item['topping_price']:.2f} = ${line_total:.2f}\n\n")
         f.write(f"Total: ${total:.2f}\n")
 
-    # 8. Update stock in menu.json
+    # 9. Update stock in menu.json
     with open('data/menu.json', 'r') as file:
         menu_data = json.load(file)
 
@@ -209,11 +249,11 @@ def checkout():
     with open('data/menu.json', 'w') as file:
         json.dump(menu_data, file, indent=4)
 
-    # 9. Clear the cart and give thank you message after order is placed
+    # 10. Clear the cart and give thank you message after order is placed
     session.pop('cart', None)
     session.modified = True
     flash(f"Thank you {customer_name}, your order has been placed!")
-    return render_template('invoices.html', customer_name=customer_name, cart=cart, total=total, invoice_date=invoice_date, invoice_number=invoice_number)
+    return render_template('invoices.html', customer_name=customer_name, cart=cart, total=total, invoice_date=invoice_date, invoice_number=invoice_number, phone=phone)
 
 @app.route('/cancel_order', methods=['POST'])
 def cancel_order():

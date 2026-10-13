@@ -1,0 +1,12 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Bailey_2026-10-12_183341
+Customer Name: Bailey
+Date: 2026-10-12 18:33:41
+
+Items:
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.50 = $9.50
+
+- Strawberry Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $10.00 = $10.00
+
+Total: $19.50

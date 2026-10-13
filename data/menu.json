@@ -1,18 +1,18 @@
 {
     "Milk Tea": {
         "Pearl Milk Tea": {
-            "price": 7.70,
-            "stock": 18,
+            "price": 7.7,
+            "stock": 17,
             "image": "pearl-milk-tea.png"
         },
         "Taro Milk Tea": {
             "price": 8,
-            "stock": 20,
+            "stock": 16,
             "image": "taro-milk-tea.png"
         },
         "Brown Sugar Milk Tea": {
-            "price": 8.20,
-            "stock": 22,
+            "price": 8.2,
+            "stock": 19,
             "image": "brown-sugar-milk-tea.png"
         },
         "Matcha Milk Tea": {
@@ -21,12 +21,12 @@
             "image": "matcha-milk-tea.png"
         },
         "Earl Grey Milk Tea": {
-            "price":  7,
+            "price": 7,
             "stock": 17,
             "image": "earl-grey-milk-tea.png"
         },
         "Mango Milk Tea": {
-            "price": 8.30,
+            "price": 8.3,
             "stock": 12,
             "image": "mango-milk-tea.png"
         }
@@ -34,12 +34,12 @@
     "Fruit Tea": {
         "Mango Green Tea": {
             "price": 7,
-            "stock": 17,
+            "stock": 16,
             "image": "mango-green-tea.png"
         },
         "Passionfruit Green Tea": {
             "price": 8,
-            "stock": 14,
+            "stock": 13,
             "image": "passionfruit-green-tea.png"
         },
         "Lychee Green Tea": {
@@ -48,7 +48,7 @@
             "image": "lychee-green-tea.png"
         },
         "Lemon Ginger Green Tea": {
-            "price": 7.50,
+            "price": 7.5,
             "stock": 10,
             "image": "lemon-ginger-green-tea.png"
         },
@@ -65,13 +65,13 @@
     },
     "Yogurt Series": {
         "Mango Yogurt Drink": {
-            "price": 8.50,
+            "price": 8.5,
             "stock": 19,
             "image": "mango-yogurt-drink.png"
         },
         "Strawberry Yogurt Drink": {
-            "price": 8.50,
-            "stock": 11,
+            "price": 8.5,
+            "stock": 9,
             "image": "strawberry-yogurt-drink.png"
         },
         "Berry Yogurt Drink": {
