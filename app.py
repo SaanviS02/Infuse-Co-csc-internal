@@ -14,6 +14,7 @@ def initialise_database():
             order_id INTEGER PRIMARY KEY AUTOINCREMENT,
             invoice_number TEXT,
             customer_name TEXT,
+            phone TEXT,
             items TEXT,
             total REAL,
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -74,6 +75,7 @@ def order_history():
                 'order_id': row[0],
                 'invoice_number': row[1],
                 'customer_name': row[2],
+                'phone': row[3],
                 'items': json.loads(row[3]),
                 'total': row[4],
                 'date': row[5]
@@ -215,9 +217,9 @@ def checkout():
     with sqlite3.connect('boba_shop.db') as conn:
         cursor =  conn.cursor()
         cursor.execute('''
-            INSERT INTO orders (invoice_number, customer_name, items, total)
+            INSERT INTO orders (invoice_number, customer_name, phone, items, total)
             VALUES (?, ?, ?, ?)
-        ''', (invoice_number, customer_name, json.dumps(cart), total))
+        ''', (invoice_number, customer_name, phone, json.dumps(cart), total))
 
     # 8. Generate an invoice file
     invoice_filename = f"{invoice_number}.txt"
@@ -226,6 +228,7 @@ def checkout():
         f.write("--- Boba Shop Invoice ---\n\n")
         f.write(f"Invoice number: {invoice_number}\n")
         f.write(f"Customer Name: {customer_name}\n")
+        f.write(f"Customer Phone: {phone}\n")
         f.write(f"Date: {invoice_date}\n\n")
         f.write("Items:\n")
         for item in cart:

@@ -2,32 +2,32 @@
     "Milk Tea": {
         "Pearl Milk Tea": {
             "price": 7.7,
-            "stock": 17,
+            "stock": 12,
             "image": "pearl-milk-tea.png"
         },
         "Taro Milk Tea": {
             "price": 8,
-            "stock": 16,
+            "stock": 3,
             "image": "taro-milk-tea.png"
         },
         "Brown Sugar Milk Tea": {
             "price": 8.2,
-            "stock": 19,
+            "stock": 8,
             "image": "brown-sugar-milk-tea.png"
         },
         "Matcha Milk Tea": {
             "price": 9,
-            "stock": 13,
+            "stock": 11,
             "image": "matcha-milk-tea.png"
         },
         "Earl Grey Milk Tea": {
             "price": 7,
-            "stock": 17,
+            "stock": 16,
             "image": "earl-grey-milk-tea.png"
         },
         "Mango Milk Tea": {
             "price": 8.3,
-            "stock": 12,
+            "stock": 11,
             "image": "mango-milk-tea.png"
         }
     },
@@ -39,7 +39,7 @@
         },
         "Passionfruit Green Tea": {
             "price": 8,
-            "stock": 13,
+            "stock": 11,
             "image": "passionfruit-green-tea.png"
         },
         "Lychee Green Tea": {
@@ -49,12 +49,12 @@
         },
         "Lemon Ginger Green Tea": {
             "price": 7.5,
-            "stock": 10,
+            "stock": 7,
             "image": "lemon-ginger-green-tea.png"
         },
         "Grapefruit Green tea": {
             "price": 7,
-            "stock": 20,
+            "stock": 18,
             "image": "grapefruit-green-tea.png"
         },
         "Peach Iced Tea": {
@@ -66,12 +66,12 @@
     "Yogurt Series": {
         "Mango Yogurt Drink": {
             "price": 8.5,
-            "stock": 19,
+            "stock": 18,
             "image": "mango-yogurt-drink.png"
         },
         "Strawberry Yogurt Drink": {
             "price": 8.5,
-            "stock": 9,
+            "stock": 8,
             "image": "strawberry-yogurt-drink.png"
         },
         "Berry Yogurt Drink": {
@@ -91,7 +91,7 @@
         },
         "Purple Rice Yogurt Drink": {
             "price": 10,
-            "stock": 18,
+            "stock": 17,
             "image": "purple-rice-yogurt-drink.png"
         }
     }
