@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Testing_2026-10-16_173932
+Customer Name: Testing
+Customer Phone: 0000000001
+Date: 2026-10-16 17:39:32
+
+Items:
+- Matcha Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $10.50 = $10.50
+
+Total: $8.92

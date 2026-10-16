@@ -34,5 +34,15 @@
             <a href="{{ url_for('menu') }}">Go to Menu</a>
         {% endif %}
 
+        {% with messages = get_flashed_messages(category_filter=["invoice"]) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li><strong><em>{{ message }}</em></strong></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
     </body>
 {% endblock %}

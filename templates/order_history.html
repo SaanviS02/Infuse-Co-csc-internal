@@ -36,5 +36,16 @@
         {% else %}
             <p>No past orders found</p>
         {% endif %}
+
+        {% with messages = get_flashed_messages(category_filter=["order_history"]) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li><strong><em>{{ message }}</em></strong></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
     </div>
 {% endblock %}

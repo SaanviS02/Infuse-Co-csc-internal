@@ -2,22 +2,22 @@
     "Milk Tea": {
         "Pearl Milk Tea": {
             "price": 7.7,
-            "stock": 12,
+            "stock": 11,
             "image": "pearl-milk-tea.png"
         },
         "Taro Milk Tea": {
             "price": 8,
-            "stock": 3,
+            "stock": 2,
             "image": "taro-milk-tea.png"
         },
         "Brown Sugar Milk Tea": {
             "price": 8.2,
-            "stock": 8,
+            "stock": 7,
             "image": "brown-sugar-milk-tea.png"
         },
         "Matcha Milk Tea": {
             "price": 9,
-            "stock": 11,
+            "stock": 10,
             "image": "matcha-milk-tea.png"
         },
         "Earl Grey Milk Tea": {

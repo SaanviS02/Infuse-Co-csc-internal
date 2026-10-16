@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Testing_2026-10-16_173953
+Customer Name: Testing
+Customer Phone: 0000000001
+Date: 2026-10-16 17:39:53
+
+Items:
+- Pearl Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.20 = $9.20
+
+Total: $9.20

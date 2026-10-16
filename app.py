@@ -53,7 +53,11 @@ def menu():
     with open('data/addons.json') as file:
         addons = json.load(file)
     
-    return render_template('menu.html', menu=menu_data, toppings=addons['toppings'], sugar_level=addons['sugar_level'], ice_level=addons['ice_level'])
+    return render_template('menu.html', 
+                            menu=menu_data,
+                            toppings=addons['toppings'],
+                            sugar_level=addons['sugar_level'],
+                            ice_level=addons['ice_level'])
 
 @app.route('/invoices')
 def invoices():
@@ -76,9 +80,9 @@ def order_history():
                 'invoice_number': row[1],
                 'customer_name': row[2],
                 'phone': row[3],
-                'items': json.loads(row[3]),
-                'total': row[4],
-                'date': row[5]
+                'items': json.loads(row[4]),
+                'total': row[5],
+                'date': row[6]
             })
     return render_template('order_history.html', orders=orders)
 
@@ -106,9 +110,9 @@ def select_addon():
     # Count's how many of the drink is already in the cart (ignoring toppings/sugar/ice)
     current_drink_count = sum(item['quantity'] for item in cart if item['item_name'] == item_name)
 
-    # Stop's more than 3 of the same drink's being added (only 3 drinks avaliable per drink)
+    # Stops more than 3 of the same drink's being added (only 3 drinks avaliable per drink)
     if current_drink_count >= 3:
-        flash(f"There is a max limit of 3 {item_name} per order.")
+        flash(f"There is a max limit of 3 {item_name} per order.", "cart")
         return redirect(url_for('cart_display'))
 
     drink_price = None
@@ -190,7 +194,7 @@ def checkout():
 
     if phone:
         if not phone.isdigit() or len(phone) != 10:
-            flash("Phone number must be exactly 10 digits")
+            flash("Phone number must be exactly 10 digits", "cart")
             return redirect(url_for('cart_display'))
 
         customer_phone_numbers = load_phone_numbers()
@@ -204,10 +208,16 @@ def checkout():
             customer = {'phone': phone, 'points': 0}
             customer_phone_numbers.append(customer)
 
-        customer['points'] += int(total) # $1 = 1 Bubbly point
+        # Check if customer has 30 or more points to redeem a 15% discount
+        if customer['points'] >= 30:
+            total = total * 0.85  # Apply 15% discount
+            customer['points'] = 0  # Reset point counter to 0
+            flash("You have collected 30 points so a 15% discount has been applied!", "invoice")
+        else:
+            customer['points'] += int(total) # $1 = 1 Bubbly point
+            flash(f"You now have {customer['points']} bubbly points!", "invoice")
 
         save_phone_numbers(customer_phone_numbers)
-        flash(f"You now have {customer['points']} bubbly points!")
 
     # 6. Calculate the invoice number and date
     invoice_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -218,7 +228,7 @@ def checkout():
         cursor =  conn.cursor()
         cursor.execute('''
             INSERT INTO orders (invoice_number, customer_name, phone, items, total)
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
         ''', (invoice_number, customer_name, phone, json.dumps(cart), total))
 
     # 8. Generate an invoice file
@@ -255,14 +265,19 @@ def checkout():
     # 10. Clear the cart and give thank you message after order is placed
     session.pop('cart', None)
     session.modified = True
-    flash(f"Thank you {customer_name}, your order has been placed!")
-    return render_template('invoices.html', customer_name=customer_name, cart=cart, total=total, invoice_date=invoice_date, invoice_number=invoice_number, phone=phone)
+    flash(f"Thank you {customer_name}, your order has been placed!", "invoice")
+    return render_template('invoices.html',
+                            customer_name=customer_name,
+                            cart=cart, total=total, 
+                            invoice_date=invoice_date, 
+                            invoice_number=invoice_number, 
+                            phone=phone)
 
 @app.route('/cancel_order', methods=['POST'])
 def cancel_order():
     session.pop('cart', None)
     session.modified = True
-    flash("Order Cancelled. Your cart has been emptied.")
+    flash("Order Cancelled. Your cart has been emptied.", "order_history")
     return redirect(url_for('cart_display'))
 
 @app.route('/cancel_saved_order/<int:order_id>', methods=['POST'])
