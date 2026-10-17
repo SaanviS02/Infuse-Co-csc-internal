@@ -2,39 +2,39 @@
     "Milk Tea": {
         "Pearl Milk Tea": {
             "price": 7.7,
-            "stock": 11,
+            "stock": 7,
             "image": "pearl-milk-tea.png"
         },
         "Taro Milk Tea": {
             "price": 8,
-            "stock": 2,
+            "stock": 0,
             "image": "taro-milk-tea.png"
         },
         "Brown Sugar Milk Tea": {
             "price": 8.2,
-            "stock": 7,
+            "stock": 0,
             "image": "brown-sugar-milk-tea.png"
         },
         "Matcha Milk Tea": {
             "price": 9,
-            "stock": 10,
+            "stock": 7,
             "image": "matcha-milk-tea.png"
         },
         "Earl Grey Milk Tea": {
             "price": 7,
-            "stock": 16,
+            "stock": 14,
             "image": "earl-grey-milk-tea.png"
         },
         "Mango Milk Tea": {
             "price": 8.3,
-            "stock": 11,
+            "stock": 9,
             "image": "mango-milk-tea.png"
         }
     },
     "Fruit Tea": {
         "Mango Green Tea": {
             "price": 7,
-            "stock": 16,
+            "stock": 13,
             "image": "mango-green-tea.png"
         },
         "Passionfruit Green Tea": {
@@ -49,12 +49,12 @@
         },
         "Lemon Ginger Green Tea": {
             "price": 7.5,
-            "stock": 7,
+            "stock": 6,
             "image": "lemon-ginger-green-tea.png"
         },
         "Grapefruit Green tea": {
             "price": 7,
-            "stock": 18,
+            "stock": 17,
             "image": "grapefruit-green-tea.png"
         },
         "Peach Iced Tea": {
@@ -71,7 +71,7 @@
         },
         "Strawberry Yogurt Drink": {
             "price": 8.5,
-            "stock": 8,
+            "stock": 7,
             "image": "strawberry-yogurt-drink.png"
         },
         "Berry Yogurt Drink": {
@@ -81,7 +81,7 @@
         },
         "Peach Yogurt Drink": {
             "price": 8,
-            "stock": 15,
+            "stock": 14,
             "image": "peach-yogurt-drink.png"
         },
         "Lemon Yogurt": {

@@ -1,0 +1,13 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_112126
+Customer Name: Saanvi
+Customer Phone: 0000000001
+Date: 2026-10-18 11:21:26
+
+Items:
+- Brown Sugar Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.70 = $9.70
+
+- Strawberry Yogurt Drink (Black Pearls, 0 sugar, 0 ice): 1 x $10.00 = $10.00
+
+Total: $16.74

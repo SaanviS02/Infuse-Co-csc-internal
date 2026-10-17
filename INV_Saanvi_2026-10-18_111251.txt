@@ -1,0 +1,15 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_111251
+Customer Name: Saanvi
+Customer Phone: 0000000001
+Date: 2026-10-18 11:12:51
+
+Items:
+- Peach Yogurt Drink (Aloe Vera, 0 sugar, 0 ice): 1 x $10.00 = $10.00
+
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.50 = $9.50
+
+- Pearl Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.20 = $9.20
+
+Total: $28.70

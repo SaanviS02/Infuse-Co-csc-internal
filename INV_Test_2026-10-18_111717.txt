@@ -1,0 +1,13 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Test_2026-10-18_111717
+Customer Name: Test
+Customer Phone: 0000000001
+Date: 2026-10-18 11:17:17
+
+Items:
+- Brown Sugar Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.70 = $9.70
+
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.50 = $9.50
+
+Total: $16.32

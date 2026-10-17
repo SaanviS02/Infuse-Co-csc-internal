@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Hey_2026-10-16_175627
+Customer Name: Hey
+Customer Phone: howyoudoin
+Date: 2026-10-16 17:56:27
+
+Items:
+- Brown Sugar Milk Tea (Black Pearls, 0 sugar, 0 ice): 2 x $9.70 = $19.40
+
+Total: $19.40

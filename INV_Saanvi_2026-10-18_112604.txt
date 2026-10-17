@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_112604
+Customer Name: Saanvi
+Customer Phone: 0000000001
+Date: 2026-10-18 11:26:04
+
+Items:
+- Matcha Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $10.50 = $10.50
+
+Total: $10.50

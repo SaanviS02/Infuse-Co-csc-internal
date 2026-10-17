@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_111302
+Customer Name: Saanvi
+Customer Phone: 0000000001
+Date: 2026-10-18 11:13:02
+
+Items:
+- Mango Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.80 = $9.80
+
+Total: $9.80

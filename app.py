@@ -34,17 +34,7 @@ def save_phone_numbers(phone_numbers):
     with open('data/phone_numbers.json', 'w') as file:
         json.dump(phone_numbers, file, indent=4)
 
-@app.route('/test')
-def test():
-    phone_numbers = load_phone_numbers()
-    phone_numbers.append({'phone': '123', 'points': 5})
-    save_phone_numbers(phone_numbers)
-    return "Done!"
-
 @app.route('/')
-def index():
-    return render_template('index.html')
-
 @app.route('/menu')
 def menu():
     with open ('data/menu.json') as file:
@@ -193,8 +183,14 @@ def checkout():
     phone = request.form.get('customer_number', '').strip()
 
     if phone:
-        if not phone.isdigit() or len(phone) != 10:
-            flash("Phone number must be exactly 10 digits", "cart")
+        # Check if the input has anything other than numbers (letters, symbols etc)
+        if not phone.isdigit():
+            flash("Only numbers allowed", "cart")
+            return redirect(url_for('cart_display'))
+
+        # Check if the number of digits is 10 or not
+        if len(phone) != 10:
+            flash("Phone number must be exactly 10 digits.", "cart")
             return redirect(url_for('cart_display'))
 
         customer_phone_numbers = load_phone_numbers()
@@ -211,7 +207,7 @@ def checkout():
         # Check if customer has 30 or more points to redeem a 15% discount
         if customer['points'] >= 30:
             total = total * 0.85  # Apply 15% discount
-            customer['points'] = 0  # Reset point counter to 0
+            customer['points'] = customer['points'] - 30 # Take away the used up 30 points
             flash("You have collected 30 points so a 15% discount has been applied!", "invoice")
         else:
             customer['points'] += int(total) # $1 = 1 Bubbly point
@@ -265,7 +261,7 @@ def checkout():
     # 10. Clear the cart and give thank you message after order is placed
     session.pop('cart', None)
     session.modified = True
-    flash(f"Thank you {customer_name}, your order has been placed!", "invoice")
+    flash(f"Thank you {customer_name}, your order has been placed.", "invoice")
     return render_template('invoices.html',
                             customer_name=customer_name,
                             cart=cart, total=total, 

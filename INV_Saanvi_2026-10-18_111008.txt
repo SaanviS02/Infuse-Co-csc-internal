@@ -1,0 +1,15 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_111008
+Customer Name: Saanvi
+Customer Phone: 0000000001
+Date: 2026-10-18 11:10:08
+
+Items:
+- Lemon Ginger Green Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.00 = $9.00
+
+- Brown Sugar Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.70 = $9.70
+
+- Mango Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.80 = $9.80
+
+Total: $28.50

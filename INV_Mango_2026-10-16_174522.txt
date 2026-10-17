@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Mango_2026-10-16_174522
+Customer Name: Mango
+Customer Phone: 0000000001
+Date: 2026-10-16 17:45:22
+
+Items:
+- Mango Green Tea (Aloe Vera, 0 sugar, 0 ice): 1 x $9.00 = $9.00
+
+Total: $9.00

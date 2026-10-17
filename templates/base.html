@@ -8,11 +8,10 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="{{ url_for('index') }}">
+            <a href="{{ url_for('menu') }}">
                 <img class="logo" src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo">
             </a>
             <ul>
-                <li><a href="{{ url_for ('menu') }}">Menu</a></li>
                 <li><a href="{{ url_for ('cart_display') }}">Cart</a></li>
                 <li><a href="{{ url_for ('invoices') }}">Invoices</a></li>
                 <li><a href="{{ url_for ('order_history') }}">Order History</a></li>
