@@ -1,12 +1,30 @@
+"""
+Boba Shop.
+
+This script runs a Flask web server, manages a sqlite3 database for orders,
+handles a customer cart, creates an invoice and order history
+and tracks loyalty points.
+"""
+
 import json
 import datetime
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    flash
+)
 
 app = Flask(__name__)
 app.secret_key = 'WinnerWinnerChickenDinner'
 
+
 def initialise_database():
+    """Initialise SQLite database and create an orders table."""
     with sqlite3.connect('boba_shop.db') as conn:
         cursor = conn.cursor()
         cursor.execute('''
@@ -20,45 +38,60 @@ def initialise_database():
             date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
-    
+
+
 # Calculate's total price based on the cart (drink prices AND topping prices)
 def calculate_total(cart):
-    return sum((item['price'] + item['topping_price']) * item['quantity'] for item in cart)
+    """Calculate the total price of the current cart."""
+    return sum(
+        (item['price'] + item['topping_price']) * item['quantity']
+        for item in cart
+    )
+
 
 # Loyalty points system
 def load_phone_numbers():
+    """Load customer phone numbers and points data from JSON file."""
     with open('data/phone_numbers.json') as file:
         return json.load(file)
 
+
 def save_phone_numbers(phone_numbers):
+    """Save the updated customer phone numbers and points data to JSON."""
     with open('data/phone_numbers.json', 'w') as file:
         json.dump(phone_numbers, file, indent=4)
 
+
 @app.route('/')
+
+
 @app.route('/menu')
 def menu():
-    with open ('data/menu.json') as file:
+    """Open and render the menu and addons JSON files."""
+    with open('data/menu.json') as file:
         menu_data = json.load(file)
 
     with open('data/addons.json') as file:
         addons = json.load(file)
-    
-    return render_template('menu.html', 
-                            menu=menu_data,
-                            toppings=addons['toppings'],
-                            sugar_level=addons['sugar_level'],
-                            ice_level=addons['ice_level'])
+
+    return render_template(
+        'menu.html',
+        menu=menu_data,
+        toppings=addons['toppings'],
+        sugar_level=addons['sugar_level'],
+        ice_level=addons['ice_level'],
+    )
+
 
 @app.route('/invoices')
 def invoices():
+    """Render and return the invoices page."""
     return render_template('invoices.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
 
 @app.route('/orders')
 def order_history():
+    """Render the order history page, fetch past orders from database."""
     with sqlite3.connect('boba_shop.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM orders ORDER BY date DESC")
@@ -76,15 +109,20 @@ def order_history():
             })
     return render_template('order_history.html', orders=orders)
 
+
 @app.route('/cart_display')
 def cart_display():
+    """Get current cart and price from session and render the cart page."""
     cart = session.get('cart', [])
     total = calculate_total(cart)
     return render_template('cart_display.html', cart=cart, total=total)
 
-@app.route('/select_addon', methods=['POST']) 
+
+@app.route('/select_addon', methods=['POST'])
 def select_addon():
-    cart = session.get('cart', [])  # Get cart list from session or start empty list
+    """Add the selected drink with chosen addons to the session cart."""
+    # Get cart list from session or start empty list
+    cart = session.get('cart', [])
 
     with open('data/menu.json') as file:
         menu_data = json.load(file)
@@ -97,10 +135,15 @@ def select_addon():
     sugar_level = request.form.get('sugar_level')
     ice_level = request.form.get('ice_level')
 
-    # Count's how many of the drink is already in the cart (ignoring toppings/sugar/ice)
-    current_drink_count = sum(item['quantity'] for item in cart if item['item_name'] == item_name)
+    # Count how many of the drink is in the cart (ignoring toppings/sugar/ice)
+    current_drink_count = sum(
+        item['quantity']
+        for item in cart
+        if item['item_name'] == item_name
+    )
 
-    # Stops more than 3 of the same drink's being added (only 3 drinks avaliable per drink)
+    # Stops more than 3 of the same drink being added
+    # (only 3 drinks avaliable per drink for 1 order)
     if current_drink_count >= 3:
         flash(f"There is a max limit of 3 {item_name} per order.", "cart")
         return redirect(url_for('cart_display'))
@@ -139,27 +182,33 @@ def select_addon():
     session.modified = True
     return redirect(url_for('cart_display'))
 
+
 @app.route('/remove_from_cart/<item>')
 def remove_from_cart(item):
+    """Decrease quantity of a drink or remove it from the session cart."""
     cart = session.get('cart', [])
     new_cart = []
-    
+
     for cart_item in cart:
         if cart_item['cart_key'] == item:
             if cart_item['quantity'] > 1:
-                cart_item['quantity'] -= 1 # If there's more than one, lower the quantity by 1
+                # If there's more than one, lower the quantity by 1
+                cart_item['quantity'] -= 1
                 new_cart.append(cart_item)
-        else:         
-            new_cart.append(cart_item) # Keep all other drinks untouched
-            
+        else:
+            # Keep all other drinks untouched
+            new_cart.append(cart_item)
+
     session['cart'] = new_cart
     session.modified = True
     flash("Updated cart.")
     return redirect(url_for('cart_display'))
 
-    # Checkout cart
+
+# Checkout cart
 @app.route('/checkout', methods=['POST'])
 def checkout():
+    """Process checkout, validate inputs, update points, and save order."""
     # 1. Validate customer name
     customer_name = request.form['customer_name'].strip().title()
 
@@ -169,7 +218,7 @@ def checkout():
         return redirect(url_for('cart_display'))
 
     # 2. Get cart
-    cart = session.get('cart', []) 
+    cart = session.get('cart', [])
 
     # 3. Check that the cart is not empty
     if not cart:
@@ -183,7 +232,7 @@ def checkout():
     phone = request.form.get('customer_number', '').strip()
 
     if phone:
-        # Check if the input has anything other than numbers (letters, symbols etc)
+        # Check if the input includes anything but numbers (eg-letters)
         if not phone.isdigit():
             flash("Only numbers allowed", "cart")
             return redirect(url_for('cart_display'))
@@ -199,31 +248,50 @@ def checkout():
         for person in customer_phone_numbers:
             if person['phone'] == phone:
                 customer = person
-        
+
         if customer is None:
             customer = {'phone': phone, 'points': 0}
             customer_phone_numbers.append(customer)
 
         # Check if customer has 30 or more points to redeem a 15% discount
         if customer['points'] >= 30:
-            total = total * 0.85  # Apply 15% discount
-            customer['points'] = customer['points'] - 30 # Take away the used up 30 points
-            flash("You have collected 30 points so a 15% discount has been applied!", "invoice")
+            # Apply 15% discount
+            total = total * 0.85
+            # Take away the used up 30 points
+            customer['points'] = customer['points'] - 30
+            flash(
+                "You have collected 30 points! A 15% discount applied!",
+                "invoice"
+            )
         else:
-            customer['points'] += int(total) # $1 = 1 Bubbly point
-            flash(f"You now have {customer['points']} bubbly points!", "invoice")
+            # $1 = 1 Bubbly point
+            customer['points'] += int(total)
+            flash(
+                f"You now have {customer['points']} bubbly points!",
+                "invoice"
+            )
 
         save_phone_numbers(customer_phone_numbers)
 
     # 6. Calculate the invoice number and date
     invoice_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date.replace(':', '').replace(' ', '_')}"
+    invoice_number = (
+        f"INV_{customer_name.replace(' ', '_')}_"
+        f"{invoice_date.replace(':', '').replace(' ', '_')}"
+    )
 
     # 7. Save the order to SQlite database
     with sqlite3.connect('boba_shop.db') as conn:
-        cursor =  conn.cursor()
+        cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO orders (invoice_number, customer_name, phone, items, total)
+            INSERT INTO orders (
+                invoice_number,
+                customer_name,
+                phone,
+                items,
+                total
+            )
+
             VALUES (?, ?, ?, ?, ?)
         ''', (invoice_number, customer_name, phone, json.dumps(cart), total))
 
@@ -238,9 +306,14 @@ def checkout():
         f.write(f"Date: {invoice_date}\n\n")
         f.write("Items:\n")
         for item in cart:
-            line_total = (item['price'] + item['topping_price']) * item['quantity']
-            f.write(f"- {item['item_name']} ({item['toppings']}, {item['sugar_level']} sugar, {item['ice_level']} ice): "
-                    f"{item['quantity']} x ${item['price'] + item['topping_price']:.2f} = ${line_total:.2f}\n\n")
+            line_total = (
+                item['price'] + item['topping_price']
+            ) * item['quantity']
+            f.write(
+                f"- {item['item_name']} ({item['toppings']}, {item['sugar_level']} sugar, "
+                f"{item['ice_level']} ice): {item['quantity']} x ${unit_price:.2f} "
+                f"= ${line_total:.2f}\n\n"
+            )
         f.write(f"Total: ${total:.2f}\n")
 
     # 9. Update stock in menu.json
@@ -250,7 +323,9 @@ def checkout():
     for cart_item in cart:
         for category, drinks in menu_data.items():
             if cart_item['item_name'] in drinks:
-                drinks[cart_item['item_name']]['stock'] -= cart_item['quantity']
+                drinks[cart_item['item_name']]['stock'] -= (
+                    cart_item['quantity']
+                )
                 if drinks[cart_item['item_name']]['stock'] < 0:
                     drinks[cart_item['item_name']]['stock'] = 0
                 break
@@ -262,28 +337,35 @@ def checkout():
     session.pop('cart', None)
     session.modified = True
     flash(f"Thank you {customer_name}, your order has been placed.", "invoice")
-    return render_template('invoices.html',
-                            customer_name=customer_name,
-                            cart=cart, total=total, 
-                            invoice_date=invoice_date, 
-                            invoice_number=invoice_number, 
-                            phone=phone)
+    return render_template(
+        'invoices.html',
+        customer_name=customer_name,
+        cart=cart, total=total,
+        invoice_date=invoice_date,
+        invoice_number=invoice_number,
+        phone=phone
+    )
+
 
 @app.route('/cancel_order', methods=['POST'])
 def cancel_order():
+    """Cancel the entire current session cart."""
     session.pop('cart', None)
     session.modified = True
     flash("Order Cancelled. Your cart has been emptied.", "order_history")
     return redirect(url_for('cart_display'))
 
+
 @app.route('/cancel_saved_order/<int:order_id>', methods=['POST'])
 def cancel_saved_order(order_id):
+    """Cancel the selected order."""
     with sqlite3.connect('boba_shop.db') as conn:
         cursor = conn.cursor()
         cursor.execute("DELETE FROM orders WHERE order_id = ?", (order_id,))
         conn.commit()
     flash("Order cancelled.")
     return redirect(url_for('order_history'))
+
 
 if __name__ == '__main__':
     initialise_database()
