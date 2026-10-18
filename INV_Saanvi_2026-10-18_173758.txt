@@ -1,0 +1,11 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_173758
+Customer Name: Saanvi
+Customer Phone: 
+Date: 2026-10-18 17:37:58
+
+Items:
+- Taro Milk Tea (Black Pearls, 0 sugar, 0 ice): 1 x $9.50 = $9.50
+
+Total: $9.50

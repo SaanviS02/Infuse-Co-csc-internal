@@ -311,7 +311,7 @@ def checkout():
             ) * item['quantity']
             f.write(
                 f"- {item['item_name']} ({item['toppings']}, {item['sugar_level']} sugar, "
-                f"{item['ice_level']} ice): {item['quantity']} x ${unit_price:.2f} "
+                f"{item['ice_level']} ice): {item['quantity']} x ${total:.2f} "
                 f"= ${line_total:.2f}\n\n"
             )
         f.write(f"Total: ${total:.2f}\n")

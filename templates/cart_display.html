@@ -4,7 +4,7 @@
 
 {% block content %}
     <body>
-        <h1>Your Cart:</h1>
+        <h1 class="cart-title">Your Cart:</h1>
 
         {% with messages = get_flashed_messages(category_filter=["cart"]) %}
             {% if messages %}
@@ -16,7 +16,7 @@
             {% endif %}
 
             {% if cart %}
-                <ul>
+                <ul class="cart-list">
                 {% for details in cart %}
                     <li>
                         <strong>{{ details['item_name'] }} - ${{ '%.2f' % details['price'] }}</strong><br>
@@ -30,9 +30,9 @@
                 {% endfor %}
                 </ul>
 
-                <h4>Cart Total: ${{ '%.2f' % total }}</h4>
+                <h4 class="cart-total">Cart Total: ${{ '%.2f' % total }}</h4>
 
-                <form action="{{ url_for('checkout') }}" method="post">
+                <form action="{{ url_for('checkout') }}" method="post" class="checkout-form">
                     <label for="customer_name_checkout">Your Name:</label>
                     <input type="text" name="customer_name" id="customer_name_checkout" required> <br>
                     <label for="customer_number">Your Phone Number (optional for potential discounts):</label>

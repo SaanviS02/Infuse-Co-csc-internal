@@ -1,37 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Boba Shop{% endblock %}
+{% block title %}Invoice - Boba Shop{% endblock %}
 
 {% block content %}
-    <body class="invoices">
-
+    <div class="invoice-container">
         {% if customer_name %}
-            <h1>Invoice</h1>
-            <p>Thank you for your order {{ customer_name }} :D</p>
+            <h1 class="invoice-title">Invoice</h1>
+            <p class="invoice-thankyou">Thank you for your order, {{ customer_name }}! :D</p>
 
-            <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
-            <p><strong>Customer Name:</strong> {{ customer_name }}</p>
-            <p><strong>Customer Number:</strong> {{ phone }}</p>
-            <p><strong>Date:</strong> {{ invoice_date }}</p>
+            <div class="invoice-details">
+                <p><strong>Invoice Number:</strong> {{ invoice_number }}</p>
+                <p><strong>Customer Name:</strong> {{ customer_name }}</p>
+                <p><strong>Customer Number:</strong> {{ phone }}</p>
+                <p><strong>Date:</strong> {{ invoice_date }}</p>
+            </div>
 
-            <h2>Drinks:</h2>
-            <ul>
+            <h2 class="invoice-subtitle">Drinks Ordered:</h2>
+            <ul class="invoice-items-list">
                 {% for item in cart %}
-                    <li>{{ item['item_name'] }} ({{ item['toppings'] }}, {{ item['sugar_level'] }} sugar, {{ item['ice_level'] }} ice):
-                        {{ item['quantity'] }} x ${{ '%.2f' % (item['price'] + item['topping_price']) }}
-                        = ${{ '%.2f' % ((item['price'] + item['topping_price']) * item['quantity']) }}
+                    <li class="invoice-item">
+                        <strong>{{ item['item_name'] }}</strong><br>
+                        Toppings: {{ item['toppings'] }} | Sugar: {{ item['sugar_level'] }}% | Ice: {{ item['ice_level'] }}%<br>
+                        {{ item['quantity'] }} x ${{ '%.2f' % (item['price'] + item['topping_price']) }} 
+                        = <strong>${{ '%.2f' % ((item['price'] + item['topping_price']) * item['quantity']) }}</strong>
                     </li>
                 {% endfor %}
             </ul>
 
-            <h2>Total: ${{ '%.2f' % total }}</h2>
+            <h2 class="invoice-total">Total: ${{ '%.2f' % total }}</h2>
 
-            <a href="{{ url_for('cart_display') }}">Back to shop</a>
+            <div class="invoice-actions">
+                <a href="{{ url_for('cart_display') }}" class="invoice-btn">Back to shop</a>
+            </div>
 
         {% else %}
-            <h2>No Invoice to Show</h2>
-            <p>Place an order via the menu page to see your invoice here.</p>
-            <a href="{{ url_for('menu') }}">Go to Menu</a>
+            <div class="empty-invoice">
+                <h2>No Invoice to Show</h2>
+                <p>Place an order via the menu page to see your invoice here.</p>
+                <a href="{{ url_for('menu') }}" class="invoice-btn">Go to Menu</a>
+            </div>
         {% endif %}
 
         {% with messages = get_flashed_messages(category_filter=["invoice"]) %}
@@ -43,6 +50,5 @@
                 </ul>
             {% endif %}
         {% endwith %}
-
-    </body>
+    </div>
 {% endblock %}

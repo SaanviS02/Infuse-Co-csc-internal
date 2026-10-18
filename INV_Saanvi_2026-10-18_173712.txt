@@ -1,0 +1,8 @@
+--- Boba Shop Invoice ---
+
+Invoice number: INV_Saanvi_2026-10-18_173712
+Customer Name: Saanvi
+Customer Phone: 
+Date: 2026-10-18 17:37:12
+
+Items:
